@@ -5,18 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro de Contatos</title>
+    <title>Lista</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">    
 </head>
 
-<body onload="ListaContatos()">
-    <h1>Listagem de Contatos</h1>
+<body onload="Lista()">
+    <h1>Read da tabela</h1>
 
     <div class="container">
         <div class="row">
             <div id="msg" class="col-sm-10 offset-sm-1 ">
-                <!--<div class="alert alert-warning">Contato não encontrado.</div>-->
             </div>
         </div>
 
@@ -28,27 +27,16 @@
         
         <form id="form-contato">            
             <div class="form-group row">
-                <div class="col-sm-4">
-                    <select name="filtro_cidade" id="filtro_cidade" onchange="ListaContatos()" class="form-control">
-                        <option value="">Selecione a Cidade</option>
-                        <option value="Betim">Betim</option>
-                        <option value="Belo Horizonte">Belo Horizonte</option>
-                        <option value="Rio de Janeiro">Rio de Janeiro</option>
-                        <option value="São Paulo">São Paulo</option>
-                        <option value="Goiânia">Goiânia</option>
+                <div class="col-sm-6">
+                    <select name="filtro_cidade" id="filtro_cidade" onchange="Lista()" class="form-control" disabled>
                     </select>                    
                 </div>
-                <div class="col-sm-8">
-                    <select name="filtro_categoria" id="filtro_categoria" onchange="ListaContatos()"  class="form-control">
-                        <option value="">Selecione a Categoria</option>
-                        <option value="amigos">Amigos</option>
-                        <option value="familia">Familia</option>
-                        <option value="trabalho">Trabalho</option>
+                <div class="col-sm-6">
+                    <select name="filtro_categoria" id="filtro_categoria" onchange="Lista()"  class="form-control" disabled>
                     </select>
                 </div>
             </div>
         </form>
-
 
         <div class="row">
             <div class="col-sm-12">
@@ -57,11 +45,10 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">Telefone</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Cidade</th>
-                            <th scope="col">Categoria</th>
-                            <th scope="col">Site</th>
+                            <th scope="col">datanascimento</th>
+                            <th scope="col">idade</th>
+                            <th scope="col">cep</th>
+                            <th scope="col">logradouro</th>
                         </tr>
                     </thead>
                     <tbody id="table-contatos">
@@ -75,7 +62,7 @@
     <script src="app.js"></script>
     <script>
         // função para listar na tabela os contatos que estão associados aos filtros 
-        function ListaContatos() {
+        function Lista() {
             
             // Obtem os dados informados pelo usuário nos filtros
             let fc = document.getElementById('filtro_cidade').value;
@@ -88,9 +75,7 @@
             for (let index = 0; index < db.data.length; index++) {
                 const contato = db.data[index];
 
-                // Verifica se os dados do contato batem com os filtros
-                if (((contato.cidade == fc) || (fc == '')) &&
-                    ((contato.categoria == fcg) || (fcg == ''))) {
+                if ((fc == '') && (fcg == '')) {
                     
                     // Inclui o contato na tabela    
                     $("#table-contatos").append(`<tr><td scope="row">${contato.id}</td>
@@ -99,7 +84,6 @@
                                                     <td>${contato.email}</td>
                                                     <td>${contato.cidade}</td>
                                                     <td>${contato.categoria}</td>
-                                                    <td>${contato.website}</td>
                                                 </tr>`);
                 }
             }

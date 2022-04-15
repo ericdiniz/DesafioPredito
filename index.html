@@ -22,11 +22,11 @@
         <!--, idade, Cep e logradouro-->
         <form id="form-contato">
             <div class="form-group row">
-                <div class="col-sm-4">
+                <div class="col-sm-2">
                     <label for="inputId">Id</label>
                     <input type="text" class="form-control" id="inputId" placeholder="ID" disabled>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-10">
                     <label for="inputNome">Nome:</label>
                     <input type="text" class="form-control" id="inputNome" required placeholder="Informe o seu nome:">
                 </div>
@@ -47,14 +47,8 @@
                     <input type="text" class="form-control" id="cep" placeholder="Informe a cidade do contato" >
                 </div>
                 <div class="col-sm-6">
-                    <label for="inputCategoria">Categoria</label>
-                    <input type="text" class="form-control" id="inputCategoria" required placeholder="Informe a categoria do contato">
-                </div>
-            </div>
-            <div class="form-group row">    
-                <div class="col-sm-12">
-                    <label for="inputSite">Web Site (*)</label>
-                    <input type="text" class="form-control" id="inputSite" required placeholder="Web Site">
+                    <label for="logradouro">logradouro</label>
+                    <input type="text" class="form-control" id="logradouro" required placeholder="Informe a categoria do contato">
                 </div>
             </div>
             <div class="form-group row">
@@ -68,7 +62,7 @@
                     <input type="button" class="btn btn-warning" id="btnUpdate" value="Alterar">
                     <input type="button" class="btn btn-danger" id="btnDelete" value="Excluir">
                     <input type="button" class="btn btn-secondary" id="btnClear" value="Limpar Form">
-                    <a href="lista_contatos.html"><input type="button" class="btn btn-warning" id="btnClear" value="Pesquisar Contatos"></a>
+                    <a href="lista_contatos.html"><input type="button" class="btn btn-warning" id="btnClear" value="Consultar"></a>
                 </div>
             </div>
         </form>
@@ -80,11 +74,10 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">Telefone</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Cidade</th>
-                            <th scope="col">Categoria</th>
-                            <th scope="col">Site</th>
+                            <th scope="col">Data Nascimento</th>
+                            <th scope="col">Idade</th>
+                            <th scope="col">cep</th>
+                            <th scope="col">logradouro</th>
                         </tr>
                     </thead>
                     <tbody id="table-contatos">
@@ -119,7 +112,6 @@
                                                 <td>${contato.email}</td>
                                                 <td>${contato.cidade}</td>
                                                 <td>${contato.categoria}</td>
-                                                <td>${contato.website}</td>
                                             </tr>`);
             }
         }
@@ -138,14 +130,13 @@
                 let campoTelefone = $("#datanascimento").val();
                 let campoEmail = $('#idade').val();
                 let campoCidade = $("#cep").val();
-                let campoCategoria = $('#inputCategoria').val();
-                let campoSite = $('#inputSite').val();
+                let campoCategoria = $('#logradouro').val();
                 let contato = { nome: campoNome, 
                     telefone: campoTelefone, 
                     email: campoEmail, 
                     cidade: campoCidade, 
-                    categoria: campoCategoria,
-                    website: campoSite };
+                    categoria: campoCategoria
+                };
 
                 insertContato(contato);
 
@@ -168,14 +159,13 @@
                 let campoTelefone = $("#datanascimento").val();
                 let campoEmail = $("#idade").val();
                 let campoCidade = $("#cep").val();
-                let campoCategoria = $("#inputCategoria").val();
-                let campoSite = $('#inputSite').val();
+                let campoCategoria = $("#logradouro").val();
                 let contato = { nome: campoNome, 
                     telefone: campoTelefone, 
                     email: campoEmail, 
                     cidade: campoCidade, 
-                    categoria: campoCategoria,
-                    website: campoSite };
+                    categoria: campoCategoria
+                 };
 
                 updateContato(parseInt(campoId), contato);
 
@@ -226,8 +216,7 @@
                 $("#datanascimento").val(colunas[2].innerText);
                 $("#idade").val(colunas[3].innerText);
                 $("#cep").val(colunas[4].innerText);
-                $("#inputCategoria").val(colunas[5].innerText);
-                $("#inputSite").val(colunas[6].innerText);
+                $("#logradouro").val(colunas[5].innerText);
             });
 
             exibeContatos();
